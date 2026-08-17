@@ -7,6 +7,7 @@ plugins {
     kotlin("android")
     kotlin("kapt")
     kotlin("plugin.serialization") version "1.8.0"
+    id("jacoco")
 }
 
 android {
@@ -55,7 +56,9 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
             applicationIdSuffix = ".debug"
             buildConfigField("boolean", "IS_GOOGLE_PLAY", "false")
-        }
+                    isTestCoverageEnabled = true
+            enableAndroidTestCoverage = true
+}
         create("releaseGooglePlay") {
             signingConfig = signingConfigs.getByName("release")
             buildConfigField("boolean", "IS_GOOGLE_PLAY", "true")
